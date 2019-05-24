@@ -43,8 +43,6 @@
 
 %define PALETTE_SIZE 80
 
-%define PAGE_SIZE ((SCREEN_W * SCREEN_H) / 4)
-
 %macro outb 2
 	%if %2 == 0
 		xor al, al
