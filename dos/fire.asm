@@ -175,6 +175,7 @@ fire_step:
 	ret
 
 copy_to_vram:
+	cli
 	mov ax, cs
 	add ax, 0x1000
 	mov ds, ax
@@ -182,10 +183,11 @@ copy_to_vram:
 	mov es, ax
 	xor si, si
 	xor di, di
-	mov cx, (SCREEN_W * SCREEN_H) / 2
-	rep movsw
+	mov cx, (SCREEN_W * SCREEN_H) / 4
+	rep movsd
 	mov ax, cs
 	mov ds, ax
+	sti
 	ret
 
 wait_vsync:
