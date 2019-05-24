@@ -6,13 +6,13 @@ const h = 200;
 const paletteSize = 80;
 
 function genPalette() {
-  let palette = [];
+  const palette = [];
 
   for (let i = 0; i < paletteSize; i++) {
-    let t = i / (paletteSize - 1);
-    let h = 60 * t;
-    let s = 100;
-    let l = 100 * t;
+    const t = i / (paletteSize - 1);
+    const h = 60 * t;
+    const s = 100;
+    const l = 100 * t;
     palette[i] = `hsl(${h}, ${s}%, ${l}%)`;
   }
 
@@ -29,9 +29,9 @@ function initFireBuffer(buffer) {
 
 function fireStep(buffer) {
   for (let y = 1; y < h; y++) {
-    let destY = y - 1;
+    const destY = y - 1;
     for (let x = 0; x < w; x++) {
-      let destX = x + Math.floor(Math.random() * 3) - 1;
+      const destX = x + Math.floor(Math.random() * 3) - 1;
       if (destX >= 0 && destX < w) {
         let color = buffer[y * w + x];
         if (color > 0 && Math.random() >= 0.5)
@@ -57,9 +57,9 @@ function main() {
 
   document.body.appendChild(canvas);
 
-  let palette = genPalette();
+  const palette = genPalette();
 
-  let buffer = new Array(w * h);
+  const buffer = new Array(w * h);
   initFireBuffer(buffer);
 
   function render() {
