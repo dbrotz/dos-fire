@@ -132,7 +132,7 @@ function createShader(gl, type, source) {
 }
 
 function getActiveAttributes(gl, program) {
-  let attributes = {};
+  const attributes = {};
 
   const attributeCount = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
 
@@ -145,7 +145,7 @@ function getActiveAttributes(gl, program) {
 }
 
 function getActiveUniforms(gl, program) {
-  let uniforms = {};
+  const uniforms = {};
 
   const uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
 
