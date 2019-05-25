@@ -299,8 +299,14 @@ function main() {
       return texture2D(prev, (gl_FragCoord.xy + vec2(x, y)) / viewSize).r;
     }
 
-    float random() {
-      return fract(sin(dot(gl_FragCoord.xy / viewSize, vec2(12.9898, 78.233)) * time) * 43758.5453);
+    float random(vec2 v) {
+      return fract(sin(dot(v, vec2(12.9898, 78.233)) * time) * 43758.5453);
+    }
+
+    bool isMatch(int x) {
+      vec2 v = (gl_FragCoord.xy + vec2(float(x), -1.0)) / viewSize;
+      int offset = int(random(v) * 3.0) - 1;
+      return (offset == -x);
     }
 
     void main() {
@@ -309,9 +315,25 @@ function main() {
         return;
       }
 
-      float n = 1.05;
-      float offsetX = random() * n - (n / 2.0);
-      gl_FragColor.r = getPixel(offsetX, -1.0) - (1.0 / 90.0) * random();
+      vec2 pos = gl_FragCoord.xy / viewSize;
+      float n = (1.0 / 90.0) * random(pos);
+
+      if (isMatch(-1)) {
+        gl_FragColor.r = getPixel(-1.0, -1.0) - n;
+        return;
+      }
+
+      if (isMatch(0)) {
+        gl_FragColor.r = getPixel(0.0, -1.0) - n;
+        return;
+      }
+
+      if (isMatch(1)) {
+        gl_FragColor.r = getPixel(1.0, -1.0) - n;
+        return;
+      }
+
+      gl_FragColor.r = getPixel(0.0, 0.0);
     }
   `;
 
