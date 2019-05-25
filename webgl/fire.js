@@ -203,7 +203,7 @@ function stepSim(gl, fb, simTextures, simProgram, positionBuffer, frontTexture, 
 
   gl.uniform2f(simProgram.uniforms.viewSize, w, h);
 
-  gl.uniform1f(simProgram.uniforms.time, time);
+  gl.uniform1f(simProgram.uniforms.time, time % 30000);
 
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 }
